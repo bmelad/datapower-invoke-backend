@@ -1,4 +1,4 @@
-if (!session.parameters.BaseURL) session.parameters.BaseURL = 'http://localhost'; 	// default base-url (if wasn't configured).
+if (!session.parameters.BaseURL) session.parameters.BaseURL = 'http://localhost'; 			// default base-url (if wasn't configured).
 if (!session.parameters.Timeout) session.parameters.Timeout = 30; 					// default timeout (in seconds).
 var sm = require('service-metadata');
 var hm = require('header-metadata');
@@ -18,7 +18,7 @@ session.input.readAsBuffer(function (error, buffer){
 			target: session.parameters.BaseURL + uri,
 			method: method,
 			headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, // default Accept & Content-Type headers values (if wasn't arrived with the request).
-			timeout: 30
+			timeout: session.parameters.Timeout
 		};
 		if (method.toLowerCase() != 'get' && method.toLowerCase() != 'delete') callDetails['data'] = buffer.toString();
 		for (var header in hm.current.get()) if (header.toLowerCase() != 'host') callDetails.headers[header] = hm.current.get(header);
